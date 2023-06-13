@@ -1,8 +1,13 @@
+import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'icon_content.dart';
+
 const bottomContainerHeight = 80.0;
 const bottomContainerColor = Color(0xFFEB1555);
+const inactiveCardColor = Color(0xFF111328);
+const activeCardColor = Color(0xFF1D1E33);
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -12,6 +17,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColor = inactiveCardColor;
+  Color femaleCardColor = inactiveCardColor;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,18 +28,21 @@ class _InputPageState extends State<InputPage> {
         ),
         body: Column(
           children: [
-            const Expanded(
+            Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ReuseableCard(
-                      cardChild: IconContent(
-                        icon: FontAwesomeIcons.mars,
-                        label: 'MALE',
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: const ReuseableCard(
+                        cardChild: IconContent(
+                          icon: FontAwesomeIcons.mars,
+                          label: 'MALE',
+                        ),
                       ),
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: ReuseableCard(
                       cardChild: IconContent(
                         icon: FontAwesomeIcons.venus,
@@ -44,7 +55,7 @@ class _InputPageState extends State<InputPage> {
             ),
             const Expanded(
               child: ReuseableCard(
-                cardChild: Column(),
+                cardChild: Row(),
               ),
             ),
             const Expanded(
@@ -71,57 +82,5 @@ class _InputPageState extends State<InputPage> {
             ),
           ],
         ));
-  }
-}
-
-class IconContent extends StatelessWidget {
-  const IconContent({super.key, required this.icon, required this.label});
-
-  final IconData icon;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 80.0,
-        ),
-        const SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 18.0,
-            color: Color(0xFF8D8E98),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ReuseableCard extends StatelessWidget {
-  const ReuseableCard(
-      {this.color = const Color(0xFF1D1E33),
-      required this.cardChild,
-      super.key});
-
-  final Color color;
-  final Widget cardChild;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: cardChild,
-    );
   }
 }
