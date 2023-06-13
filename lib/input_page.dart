@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+const bottomContainerHeight = 80.0;
+const bottomContainerColor = Color(0xFFEB1555);
+
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
 
@@ -16,42 +19,38 @@ class _InputPageState extends State<InputPage> {
         ),
         body: Column(
           children: [
-            Expanded(
+            const Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ReuseableCard(
-                      color: const Color(0xFF1D1E33),
-                    ),
+                    child: ReuseableCard(),
                   ),
                   Expanded(
-                    child: ReuseableCard(
-                      color: const Color(0xFF1D1E33),
-                    ),
+                    child: ReuseableCard(),
                   ),
                 ],
               ),
             ),
-            Expanded(
-              child: ReuseableCard(
-                color: const Color(0xFF1D1E33),
-              ),
+            const Expanded(
+              child: ReuseableCard(),
             ),
-            Expanded(
+            const Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ReuseableCard(
-                      color: const Color(0xFF1D1E33),
-                    ),
+                    child: ReuseableCard(),
                   ),
                   Expanded(
-                    child: ReuseableCard(
-                      color: const Color(0xFF1D1E33),
-                    ),
+                    child: ReuseableCard(),
                   ),
                 ],
               ),
+            ),
+            Container(
+              color: bottomContainerColor,
+              margin: const EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: bottomContainerHeight,
             ),
           ],
         ));
@@ -59,9 +58,13 @@ class _InputPageState extends State<InputPage> {
 }
 
 class ReuseableCard extends StatelessWidget {
-  ReuseableCard({required this.color, super.key});
+  const ReuseableCard(
+      {this.color = const Color(0xFF1D1E33),
+      //this.cardChild = null,
+      super.key});
 
-  Color color;
+  final Color color;
+  //final Widget cardChild;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +74,7 @@ class ReuseableCard extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(10.0),
       ),
+      //child: cardChild,
     );
   }
 }
