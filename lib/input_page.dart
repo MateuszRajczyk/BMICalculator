@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const bottomContainerHeight = 80.0;
 const bottomContainerColor = Color(0xFFEB1555);
@@ -23,25 +24,41 @@ class _InputPageState extends State<InputPage> {
               child: Row(
                 children: [
                   Expanded(
-                    child: ReuseableCard(),
+                    child: ReuseableCard(
+                      cardChild: IconContent(
+                        icon: FontAwesomeIcons.mars,
+                        label: 'MALE',
+                      ),
+                    ),
                   ),
                   Expanded(
-                    child: ReuseableCard(),
+                    child: ReuseableCard(
+                      cardChild: IconContent(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
             const Expanded(
-              child: ReuseableCard(),
+              child: ReuseableCard(
+                cardChild: Column(),
+              ),
             ),
             const Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ReuseableCard(),
+                    child: ReuseableCard(
+                      cardChild: Column(),
+                    ),
                   ),
                   Expanded(
-                    child: ReuseableCard(),
+                    child: ReuseableCard(
+                      cardChild: Column(),
+                    ),
                   ),
                 ],
               ),
@@ -57,14 +74,44 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
+class IconContent extends StatelessWidget {
+  const IconContent({super.key, required this.icon, required this.label});
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: 80.0,
+        ),
+        const SizedBox(
+          height: 15.0,
+        ),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 18.0,
+            color: Color(0xFF8D8E98),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class ReuseableCard extends StatelessWidget {
   const ReuseableCard(
       {this.color = const Color(0xFF1D1E33),
-      //this.cardChild = null,
+      required this.cardChild,
       super.key});
 
   final Color color;
-  //final Widget cardChild;
+  final Widget cardChild;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +121,7 @@ class ReuseableCard extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(10.0),
       ),
-      //child: cardChild,
+      child: cardChild,
     );
   }
 }
