@@ -2,12 +2,8 @@ import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'constants.dart';
 import 'icon_content.dart';
-
-const bottomContainerHeight = 80.0;
-const bottomContainerColor = Color(0xFFEB1555);
-const inactiveCardColor = Color(0xFF111328);
-const activeCardColor = Color(0xFF1D1E33);
 
 enum Gender {
   male,
@@ -31,6 +27,7 @@ class _InputPageState extends State<InputPage> {
           title: const Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
@@ -43,8 +40,8 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       color: selectedGender == Gender.male
-                          ? activeCardColor
-                          : inactiveCardColor,
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
                       cardChild: const IconContent(
                         icon: FontAwesomeIcons.mars,
                         label: 'MALE',
@@ -60,8 +57,8 @@ class _InputPageState extends State<InputPage> {
                       },
                       child: ReuseableCard(
                         color: selectedGender == Gender.female
-                            ? activeCardColor
-                            : inactiveCardColor,
+                            ? kActiveCardColor
+                            : kInactiveCardColor,
                         cardChild: const IconContent(
                           icon: FontAwesomeIcons.venus,
                           label: 'FEMALE',
@@ -72,11 +69,11 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            // Expanded(
-            //   child: ReuseableCard(
-            //     cardChild: Container(),
-            //   ),
-            // ),
+            const Expanded(
+              child: ReuseableCard(
+                cardChild: Column(),
+              ),
+            ),
             const Expanded(
               child: Row(
                 children: [
@@ -94,10 +91,10 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             Container(
-              color: bottomContainerColor,
+              color: kBottomContainerColor,
               margin: const EdgeInsets.only(top: 10.0),
               width: double.infinity,
-              height: bottomContainerHeight,
+              height: kBottomContainerHeight,
             ),
           ],
         ));
